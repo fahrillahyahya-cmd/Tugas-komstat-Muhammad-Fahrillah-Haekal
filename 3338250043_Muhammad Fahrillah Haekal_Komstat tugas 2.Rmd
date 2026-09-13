@@ -1,0 +1,49 @@
+---
+title: "tugas komputasi statistika"
+author: "haekal"
+date: "2026-09-13"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+data(iris) # 1 tampilkan data sepal.lenght
+
+iris$Sepal.Length
+str(iris) # 2 sebutkan tipe data tiap kolom
+
+library(dplyr) # 3 variabel baru dengan nama turunan yang berasal/ turunan dari variabel Sepal.Width
+iris <- iris %>%
+  mutate(
+    Kategori_sepal_width = ifelse(Sepal.Width > 3, "Besar","Kecil")
+  )
+
+iris <- iris %>% # 4 ubah variabel turunan menjadi sepal
+  rename(sepal = Kategori_sepal_width)
+
+names(iris)
+
+data_virginica_besar <- iris %>% # 5 ambil data dengan sepal bernilai besar dari species virginica
+  filter(sepal == "Besar" & Species == "virginica")
+
+print(data_virginica_besar)
+
+table(iris$Species) # 6 cek jumlah species dalam data
+
+list_iris <- split(iris, iris$Species) # 7 pecah data iris menjadi 3 data frame dengan tiap data frame khusus untuk species tertentu
+
+iris_setosa <- list_iris$setosa
+iris_versicolor <- list_iris$versicolor
+iris_virginica <- list_iris$virginica
+
+nrow(iris_setosa)
+nrow(iris_versicolor)
+nrow(iris_virginica)
+
+iris_setosa <- arrange(iris_setosa, Sepal.Width) # 8 Dari setiap data frame species, urutkan data berdasarkan Sepal.Width
+iris_versicolor <- arrange(iris_versicolor, Sepal.Width)
+iris_virginica <- arrange(iris_virginica, Sepal.Width)
+
+head(iris_setosa)
+head(iris_versicolor)
+head(iris_virginica)
+```
