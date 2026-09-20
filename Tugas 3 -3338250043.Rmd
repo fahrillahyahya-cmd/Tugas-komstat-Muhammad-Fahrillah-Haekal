@@ -1,0 +1,65 @@
+---
+title: "Tugas 3"
+author: "3338250043_Muuhammad fahrillah Haekal Yahya"
+date: "2026-09-20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# 1. Buka data airquality
+data(airquality)
+str(airquality)
+
+# 2. Buat histogram untuk variabel Wind, sertakan pula density nya
+# Histogram dengan breaks mulai dari 0
+hist(airquality$Wind,
+     breaks = 0 + (0:11) * 2,
+     xlab = "Wind speed (mph)",
+     main = "Histogram A: Breaks di 0, 2, 4, ...")
+
+# Histogram dengan breaks mulai dari 1
+hist(airquality$Wind,
+     breaks = 1 + (0:11) * 2,
+     xlab = "Wind speed (mph)",
+     main = "Histogram B: Breaks di 1, 3, 5, ...")
+
+# Density
+dens_wind <- density(airquality$Wind)
+hist(airquality$Wind,
+     breaks = 0 + (0:11) * 2,
+     probability = TRUE,
+     xlab = "Wind speed (mph)",
+     main = "Histogram + Density Curve: Wind")
+lines(dens_wind, col = "blue", lwd = 2)
+
+# 3. Buat boxplot dan steam and leaf
+# Boxplot
+boxplot(airquality$Wind, horiz = TRUE,
+        main = "Boxplot Wind Speed",
+        xlab = "Wind speed (mph)")
+
+# Stem and leaf
+stem(airquality$Wind)
+
+# 4. Buat scatter plot
+# Scatterplot Ozone vs Wind
+plot(Ozone ~ Wind, data = airquality,
+     pch = 16,
+     main = "Scatterplot: Ozone vs Wind Speed",
+     xlab = "Wind speed (mph)",
+     ylab = "Ozone (ppb)")
+
+# Tambahkan rug plot pada sumbu x dan y
+rug(airquality$Wind)
+rug(airquality$Ozone[!is.na(airquality$Ozone)], side = 2)
+
+# Panel A: skala linear
+plot(Ozone ~ Wind, data = airquality,
+     xlab = "Wind speed (mph)", ylab = "Ozone (ppb)",
+     main = "Panel A: Skala Linear")
+
+# Panel B: skala logaritmik pada Ozone
+plot(log(Ozone) ~ Wind, data = airquality,
+     xlab = "Wind speed (mph)", ylab = "log(Ozone)",
+     main = "Panel B: Skala Logaritmik")
+```
